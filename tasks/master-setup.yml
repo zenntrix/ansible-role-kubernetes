@@ -46,7 +46,7 @@
     - not kubernetes_init_stat.stat.exists
 
 - name: Check if Kubernetes Dashboard UI service already exists.
-  shell: kubectl get services --namespace kube-system | grep -q kubernetes-dashboard
+  shell: kubectl get services --namespace kubernetes-dashboard | grep -q kubernetes-dashboard
   changed_when: false
   register: kubernetes_dashboard_service
   ignore_errors: True
