@@ -48,8 +48,10 @@
 - name: Check if Kubernetes Dashboard UI service already exists.
   shell: kubectl get services --namespace kube-system | grep -q kubernetes-dashboard
   changed_when: false
-  failed_when: false
   register: kubernetes_dashboard_service
+  ignore_errors: True
+  failed_when:
+    - kubernetes_dashboard_service.rc == 1
   when: kubernetes_enable_web_ui | bool
 
 - name: Enable the Kubernetes Web Dashboard UI (if configured).
